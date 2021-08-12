@@ -1,0 +1,37 @@
+<h2>Contacto</h2>
+
+
+<!-- convertimos este formulario en uno para angular  con esto #formContacto="ngForm"-->
+<form #formContacto="ngForm" (ngSubmit)="onSubmit(formContacto)">
+	
+	<label for="nombre">Nombre</label> <br/>
+	<input type="text" name="nombre" #nombre="ngModel" [(ngModel)]="usuario.nombre" required="" pattern="[a-zA-Z]+" /> 
+
+	<!-- se coloca requires en todos los inputs y l
+	
+		touched hace que cuando selecciones el input y luego salgas ejecute un mensaje
+	
+	uego hacemos la validación -->
+
+	<span *ngIf="nombre.touched && !nombre.valid"> Nombre Obligatorio </span> <br/>
+
+	<label for="apellido">Apellido</label> <br/>
+	<input type="text" name="apellido" #apellidos="ngModel" [(ngModel)]="usuario.apellidos" required="" pattern="[a-zA-Z]+"/> 
+
+	<span *ngIf="apellidos.touched && !apellidos.valid"> Apellido Obligatorio </span> <br/>
+
+	<label for="email">Email</label> <br/>
+	<input type="email" name="email" #email="ngModel" [(ngModel)]="usuario.email" required="" />
+
+	<span *ngIf="email.touched && !email.valid"> Email Obligatorio </span> <br/>
+	
+
+	<label for="mensaje">Mensaje</label> <br/>
+	<textarea name="mensaje" #mensaje="ngModel" [(ngModel)]="usuario.mensaje" required="" pattern="[a-zA-Z]+"></textarea> 
+
+	<span *ngIf="mensaje.touched && !mensaje.valid"> Mensajes Obligatorio </span><br/>
+
+	<!-- con el [disable] desactivasmo un boton-->
+
+	<input type="submit" value="Enviar" [disabled]="!formContacto.form.valid">
+</form>

@@ -1,0 +1,99 @@
+<!--<h2>Componente de Video-Juego</h2>-->
+<h2>{{titulo}}</h2> <!-- aca estamos invocando una propiedad del componente. y cuando se incluye de esta manera se llama interpolación -->
+<!--<ul>
+	<li>Adidas Predator</li>
+	<li>Nike Mercury</li>
+	<li>Puma Vapor</li>
+	<li>Converse Classics</li>
+</ul>-->
+<p>Añade tu Marca:</p>
+
+<p>
+<input type="text" [(ngModel)]="mi_marca" (blur)="onBlur()" (keyup.enter)="mostrarPalabra()"/> <!--Acá modificamos la propiedad mi_marca del componente-->
+</p>
+
+<p>{{mi_marca}}</p>
+
+<button (click)="getMarca()"> Mostrar Marca</button>
+<button (click)="addMarca()"> Añadir Marca</button>
+
+<p>
+	Compra las zapatillas de las mejores marcas
+</p>
+
+	<ul>
+		<li *ngFor ="let marca of marcas; let indice = index">{{indice + ' ' + marca}}
+			<button (click)="delMarca(indice)">Borrar Marca</button>
+		</li>
+
+	</ul> 
+
+<!-- podemos hacer un recorrido de un arreglo con la directiva ngFor -->
+
+<p>Las zapatillas disponibles son:</p>
+
+<ul>
+	<li *ngFor="let deportiva of zapatillas">
+		
+		<span [ngStyle]=
+			"{
+				'text-decoration' : !deportiva.stock ? 'line-through' : 'none'
+			}">
+				{{deportiva.nombre}} - 
+
+			<strong
+
+				[class.altoPrecio]="deportiva.precio >= 80"
+				[ngClass]="['fondoRojo', 'subrayado']"
+
+				[ngClass]="{
+					'fondoRojo':deportiva.precio >= 100, 
+					'subrayado':deportiva.marca == 'NIKE'
+				}">
+
+				{{deportiva.precio}}$
+			</strong>
+		</span>
+
+		<span *ngIf="deportiva.precio < 80"
+				[style.background]="deportiva.precio < 80 ? 'green' : 'transparent'"
+				[style.color]="deportiva.precio < 80 ? 'white' : 'black'">
+			En Oferta!!!
+		</span>
+	</li>
+</ul>
+
+<p>El color de la mayoría de nuestras zapatillas es:</p>
+
+<input type="text" [(ngModel)]="color" />
+
+<ul [ngSwitch] = "color">
+
+	<!--<li *ngSwitchCase = "'yellow'">
+		El color predominante es el <span style="background:yellow;">amarillo.</span>
+	</li>
+	<li *ngSwitchCase = "'red'">
+		El color predominante es el <span style="background:red; color:white;">rojo.</span>
+	</li>
+	<li *ngSwitchCase = "'blue'">
+		El color predominante es el <span style="background:blue;  color:white;">azul</span>
+	</li>
+	<li *ngSwitchCase = "'brown'">
+		El color predominante es el <span style="background:brown; color:white;">marrón</span>
+	</li>-->
+
+
+	<li *ngSwitchCase = "'yellow'">
+		El color predominante es el <span [ngStyle]="{'background' : color}">amarillo.</span>
+	</li>
+	<li *ngSwitchCase = "'red'">
+		El color predominante es el <span [ngStyle]="{'background' : color}">rojo.</span>
+	</li>
+	<li *ngSwitchCase = "'blue'">
+		El color predominante es el <span [ngStyle]="{'background' : color}">azul</span>
+	</li>
+	<li *ngSwitchCase = "'brown'">
+		El color predominante es el <span [ngStyle]="{'background' : color}">marrón</span>
+	</li>
+	
+</ul>

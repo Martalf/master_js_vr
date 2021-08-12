@@ -1,0 +1,53 @@
+
+<form #newUser="ngForm" (ngSubmit)="onSubmit(newUser)">
+	
+	<p>
+		
+		<label for="name">Nombre</label> <br/>
+		<input type="text" name="name" #name="ngModel" [(ngModel)]="new_user.name" required="" pattern="[a-zA-Z]+" /> 
+		<span *ngIf="name.touched && !name.valid"> Nombre Obligatorio </span>
+	</p>
+
+	<p>
+		
+		<label for="job">Trabajo</label> <br/>
+		<input type="text" name="job" #job="ngModel" [(ngModel)]="new_user.job" required="" pattern="[a-zA-Z]+" /> 
+		<span *ngIf="job.touched && !job.valid"> Trabajo Obligatorio </span>
+	</p>
+
+
+	<input type="submit" value="Enviar" [disabled]="!newUser.form.valid">
+</form>
+
+<hr>
+
+<div *ngIf="usuario_guardado">
+	
+	<!-- el usua-->
+	<h2>El usuario se guardo en la fecha y con el id siguiente:</h2>
+	<h3>{{ usuario_guardado.createdAt }}</h3>
+	<h4>{{ usuario_guardado.id }}</h4>
+</div>
+
+{{ fecha | date:'fullDate' | uppercase }}  <br/> <!-- pipe de transformación de texto -->
+{{ fecha | date:'dd/MM/yy' }} <br/>
+{{ 'HOLA MUNDO USANDO PIPES' | lowercase }} <br/> <!-- pipe de transformación de texto minusculas -->
+{{ 4 | calculadora:2 }} <!-- pasamos esos dos parámetros para que funcione la pipe declarada -->
+
+
+<hr>
+<input type="text" [(ngModel)]="userId" (keyup.enter)="cargaUsuario()"/>
+
+
+<div *ngIf="!user">
+	Cargando...
+</div>
+
+<div *ngIf="user">
+
+
+	<img src="{{ user.avatar }}" width = "200"/>
+
+	<h3>{{ user.first_name + ' ' + user.last_name }}</h3>
+</div>
+

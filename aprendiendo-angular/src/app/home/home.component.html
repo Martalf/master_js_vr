@@ -1,0 +1,29 @@
+<h2>
+	Página Home
+</h2>
+
+<!--<div *ngIf="identificado; else identificado_no">
+		
+	<p>Gracias, ahora estás identificado en la aplicación..., pulsa el boton para salir!</p>
+
+	<button (click)="setSalida()">Salir</button>
+</div>-->
+
+<!-- USO DEL THEN en el div para condicionar los ng-templates -->
+<div *ngIf="!identificado; then identificado_no else identificado_si"></div>
+
+<ng-template #identificado_si>
+
+	<p *ngIf="identificado">Ahora estás<strong> identificado</strong>, pulsa el botón para salir</p>
+	
+	<button (click)="setSalida()">Salir</button>
+</ng-template>
+
+
+
+<ng-template #identificado_no>
+
+	<p *ngIf="!identificado">No estas <strong>identificado</strong>, pulsa el botón para identificarte</p>
+	
+	<button (click)="setIdentificado()">Identificarse</button>
+</ng-template>
